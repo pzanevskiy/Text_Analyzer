@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ConcordanceItemViewModel>
+@{
+    ViewBag.Title = "List";
+}
+
+@if (Model != null && Model.Count() > 0)
+{
+    <h4>Список слов</h4>
+    <hr />
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <p><span> @item.Word </span>---<span> @item.Count</span></p>
+            </div>
+            <hr />
+        }
+    </div>
+}
+else
+{
+    <div>Нет записей</div>
+}

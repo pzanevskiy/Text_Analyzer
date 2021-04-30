@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text_Analyzer", "Text_Analyzer\Text_Analyzer.csproj", "{32003EBC-5315-4CB4-96B2-076C7440FE56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task2", "..\EPAM_Task_0\TextParser\Task2.csproj", "{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32003EBC-5315-4CB4-96B2-076C7440FE56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32003EBC-5315-4CB4-96B2-076C7440FE56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32003EBC-5315-4CB4-96B2-076C7440FE56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32003EBC-5315-4CB4-96B2-076C7440FE56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2781A8F8-3E85-45F3-A2DF-4695CD183248}
+	EndGlobalSection
+EndGlobal
