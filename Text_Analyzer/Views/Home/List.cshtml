@@ -3,6 +3,8 @@
     ViewBag.Title = "List";
 }
 
+<a asp-controller="Home" asp-action="Download">Download</a>
+
 @if (Model != null && Model.Count() > 0)
 {
     <h4>Список слов</h4>
@@ -10,10 +12,9 @@
     <div class="container">
         @foreach (var item in Model)
         {
-            <div class="row">
+            <div>
                 <p><span> @item.Word </span>---<span> @item.Count</span></p>
-            </div>
-            <hr />
+            </div>            
         }
     </div>
 }

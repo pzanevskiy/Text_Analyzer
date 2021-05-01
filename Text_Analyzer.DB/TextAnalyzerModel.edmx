@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TextAnalyzerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TextAnalyzerModelStoreContainer">
+    <EntitySet Name="UploadedFilesSet" EntityType="TextAnalyzerModel.Store.UploadedFilesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilesToDownloadSet" EntityType="TextAnalyzerModel.Store.FilesToDownloadSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FileLinksSet" EntityType="TextAnalyzerModel.Store.FileLinksSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Entity1UploadedFiles" Association="TextAnalyzerModel.Store.Entity1UploadedFiles">
+      <End Role="Entity1" EntitySet="FileLinksSet" />
+      <End Role="UploadedFiles" EntitySet="UploadedFilesSet" />
+    </AssociationSet>
+    <AssociationSet Name="Entity1FilesToDownload" Association="TextAnalyzerModel.Store.Entity1FilesToDownload">
+      <End Role="Entity1" EntitySet="FileLinksSet" />
+      <End Role="FilesToDownload" EntitySet="FilesToDownloadSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UploadedFilesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Entity1UploadedFiles_UploadedFiles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilesToDownloadSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Entity1FilesToDownload_FilesToDownload_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FileLinksSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="Entity1UploadedFiles">
+    <End Role="Entity1" Type="TextAnalyzerModel.Store.FileLinksSet" Multiplicity="1" />
+    <End Role="UploadedFiles" Type="TextAnalyzerModel.Store.UploadedFilesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UploadedFiles">
+        <PropertyRef Name="Entity1UploadedFiles_UploadedFiles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Entity1FilesToDownload">
+    <End Role="Entity1" Type="TextAnalyzerModel.Store.FileLinksSet" Multiplicity="1" />
+    <End Role="FilesToDownload" Type="TextAnalyzerModel.Store.FilesToDownloadSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FilesToDownload">
+        <PropertyRef Name="Entity1FilesToDownload_FilesToDownload_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TextAnalyzerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TextAnalyzerModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UploadedFilesSet" EntityType="TextAnalyzerModel.UploadedFiles" />
+          <EntitySet Name="FilesToDownloadSet" EntityType="TextAnalyzerModel.FilesToDownload" />
+          <EntitySet Name="FileLinksSet" EntityType="TextAnalyzerModel.FileLinks" />
+          <AssociationSet Name="Entity1UploadedFiles" Association="TextAnalyzerModel.Entity1UploadedFiles">
+            <End Role="Entity1" EntitySet="FileLinksSet" />
+            <End Role="UploadedFiles" EntitySet="UploadedFilesSet" />
+          </AssociationSet>
+          <AssociationSet Name="Entity1FilesToDownload" Association="TextAnalyzerModel.Entity1FilesToDownload">
+            <End Role="Entity1" EntitySet="FileLinksSet" />
+            <End Role="FilesToDownload" EntitySet="FilesToDownloadSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="UploadedFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Filename" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilesToDownload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Filename" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileLinks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UploadedFiles" Relationship="TextAnalyzerModel.Entity1UploadedFiles" FromRole="Entity1" ToRole="UploadedFiles" />
+          <NavigationProperty Name="FilesToDownload" Relationship="TextAnalyzerModel.Entity1FilesToDownload" FromRole="Entity1" ToRole="FilesToDownload" />
+        </EntityType>
+        <Association Name="Entity1UploadedFiles">
+          <End Type="TextAnalyzerModel.FileLinks" Role="Entity1" Multiplicity="1" />
+          <End Type="TextAnalyzerModel.UploadedFiles" Role="UploadedFiles" Multiplicity="*" />
+        </Association>
+        <Association Name="Entity1FilesToDownload">
+          <End Type="TextAnalyzerModel.FileLinks" Role="Entity1" Multiplicity="1" />
+          <End Type="TextAnalyzerModel.FilesToDownload" Role="FilesToDownload" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TextAnalyzerModelStoreContainer" CdmEntityContainer="TextAnalyzerModelContainer">
+    <EntitySetMapping Name="UploadedFilesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TextAnalyzerModel.UploadedFiles)">
+        <MappingFragment StoreEntitySet="UploadedFilesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilesToDownloadSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TextAnalyzerModel.FilesToDownload)">
+        <MappingFragment StoreEntitySet="FilesToDownloadSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileLinksSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TextAnalyzerModel.FileLinks)">
+        <MappingFragment StoreEntitySet="FileLinksSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Entity1UploadedFiles" TypeName="TextAnalyzerModel.Entity1UploadedFiles" StoreEntitySet="UploadedFilesSet">
+      <EndProperty Name="Entity1">
+        <ScalarProperty Name="Id" ColumnName="Entity1UploadedFiles_UploadedFiles_Id" />
+      </EndProperty>
+      <EndProperty Name="UploadedFiles">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Entity1FilesToDownload" TypeName="TextAnalyzerModel.Entity1FilesToDownload" StoreEntitySet="FilesToDownloadSet">
+      <EndProperty Name="Entity1">
+        <ScalarProperty Name="Id" ColumnName="Entity1FilesToDownload_FilesToDownload_Id" />
+      </EndProperty>
+      <EndProperty Name="FilesToDownload">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

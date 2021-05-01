@@ -22,9 +22,9 @@ namespace Text_Analyzer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        IParser parser = new Parser();
-        IFileService fileService = new FileService();
+        private readonly IParser _parser = new Parser();
+        private readonly IFileService _fileService = new FileService();
+        private readonly ITextService _textService = new TextService();
         private readonly IMapper _mapper;
 
         public HomeController(ILogger<HomeController> logger, IMapper mapper)
@@ -44,67 +44,28 @@ namespace Text_Analyzer.Controllers
             IText text = new Text();
             if (uploadedFile != null)
             {
-                // путь к папке Files
-                var result = new StringBuilder();
-                using (var reader = new StreamReader(uploadedFile.OpenReadStream()))
-                {
-                    while (reader.Peek() >= 0)
-                        result.AppendLine(await reader.ReadLineAsync());
-                }
                 string path = "wwwroot/Files/" + uploadedFile.FileName;
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                switch (uploadedFile.ContentType)
-                {
-                    case "application/pdf":
-                        {
-                            ICollection<string> s = fileService.GetReaderPDF(path);
-                            text = parser.ParseText(s);
-                            var x = text.Sentences.SelectMany(sentence => sentence.Words)
-                                .GroupBy(word => word.ToString().ToLower())
-                                .Select(item => new ConcordanceItem { Word = new Word(item.Key), Count = item.ToList().Count })
-                                .Where(item => item.Word.Count > 0)
-                                .OrderBy(x => x.Word.FirstChar);
-                            //.GroupBy(item => item.Word.FirstChar);
-                            var items = _mapper.Map<IEnumerable<ConcordanceItem>, IEnumerable<ConcordanceItemViewModel>>(x);
-                            return View("List", items);
-                            break;
-                        }
-                    case "text/plain":
-                        {                           
-                            ICollection<string> s = fileService.GetTXT(path);
-                            text = parser.ParseText(s);
-                            var x = text.Sentences.SelectMany(sentence => sentence.Words)
-                               .GroupBy(word => word.ToString().ToLower())
-                               .Select(item => new ConcordanceItem { Word = new Word(item.Key), Count = item.ToList().Count })
-                               .Where(item => item.Word.Count > 0)
-                               .OrderBy(x => x.Word.FirstChar);
-                            break;
-                        }
-                    case "application/msword":
-                    case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                        {
-                            ICollection<string> s = fileService.GetReader(path);
-                            text = parser.ParseText(s);
-                            var x = text.Sentences.SelectMany(sentence => sentence.Words)
-                                .GroupBy(word => word.ToString().ToLower())
-                                .Select(item => new ConcordanceItem { Word = new Word(item.Key), Count = item.ToList().Count })
-                                .Where(item => item.Word.Count > 0)
-                                .OrderBy(x => x.Word.FirstChar);
-                            break;
-                        }
-                    default: { break; }
-                }
+                ICollection<string> strings = _fileService.GetData(path, uploadedFile.ContentType);
+                text = _parser.ParseText(strings);
+                IEnumerable<ConcordanceItem> x = _textService.Concordance(text);                
+                var items = _mapper.Map<IEnumerable<ConcordanceItem>, IEnumerable<ConcordanceItemViewModel>>(x);
+                return View("List", items);
             }
-
             return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Download()
+        {
+            return File("Files/psix4.pdf", "application/pdf", "file.pdf");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

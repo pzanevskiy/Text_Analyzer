@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a4dc3b7bae947bfbc51ece00d91fe2b" Name="Diagram1" >
+        <EntityTypeShape EntityType="TextAnalyzerModel.UploadedFiles" Width="1.5" PointX="2.75" PointY="1" />
+        <EntityTypeShape EntityType="TextAnalyzerModel.FilesToDownload" Width="1.5" PointX="7.125" PointY="0.875" />
+        <EntityTypeShape EntityType="TextAnalyzerModel.FileLinks" Width="1.5" PointX="4.875" PointY="2.75" />
+        <AssociationConnector Association="TextAnalyzerModel.Entity1UploadedFiles" />
+        <AssociationConnector Association="TextAnalyzerModel.Entity1FilesToDownload" ManuallyRouted="false" >
+          <ConnectorPoint PointX="8.25" PointY="2.2783821614583331" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
