@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/01/2021 12:07:46
+-- Date Created: 05/01/2021 15:03:57
 -- Generated from EDMX file: C:\Users\Павел\source\repos\Text_Analyzer\Text_Analyzer.DB\TextAnalyzerModel.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,26 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_Entity1FilesToDownload]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FilesToDownloadSet] DROP CONSTRAINT [FK_Entity1FilesToDownload];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Entity1UploadedFiles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UploadedFilesSet] DROP CONSTRAINT [FK_Entity1UploadedFiles];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FileLinksSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FileLinksSet];
+GO
+IF OBJECT_ID(N'[dbo].[FilesToDownloadSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FilesToDownloadSet];
+GO
+IF OBJECT_ID(N'[dbo].[UploadedFilesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UploadedFilesSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -30,22 +45,22 @@ GO
 -- Creating table 'UploadedFilesSet'
 CREATE TABLE [dbo].[UploadedFilesSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Filename] nvarchar(max)  NOT NULL,
-    [Entity1UploadedFiles_UploadedFiles_Id] int  NOT NULL
+    [Filename] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'FilesToDownloadSet'
 CREATE TABLE [dbo].[FilesToDownloadSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Filename] nvarchar(max)  NOT NULL,
-    [Entity1FilesToDownload_FilesToDownload_Id] int  NOT NULL
+    [Filename] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'FileLinksSet'
 CREATE TABLE [dbo].[FileLinksSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UploadedFiles_Id] int  NOT NULL,
+    [FilesToDownload_Id] int  NOT NULL
 );
 GO
 
@@ -75,34 +90,34 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Entity1UploadedFiles_UploadedFiles_Id] in table 'UploadedFilesSet'
-ALTER TABLE [dbo].[UploadedFilesSet]
-ADD CONSTRAINT [FK_Entity1UploadedFiles]
-    FOREIGN KEY ([Entity1UploadedFiles_UploadedFiles_Id])
-    REFERENCES [dbo].[FileLinksSet]
+-- Creating foreign key on [UploadedFiles_Id] in table 'FileLinksSet'
+ALTER TABLE [dbo].[FileLinksSet]
+ADD CONSTRAINT [FK_UploadedFilesFileLinks]
+    FOREIGN KEY ([UploadedFiles_Id])
+    REFERENCES [dbo].[UploadedFilesSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_Entity1UploadedFiles'
-CREATE INDEX [IX_FK_Entity1UploadedFiles]
-ON [dbo].[UploadedFilesSet]
-    ([Entity1UploadedFiles_UploadedFiles_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_UploadedFilesFileLinks'
+CREATE INDEX [IX_FK_UploadedFilesFileLinks]
+ON [dbo].[FileLinksSet]
+    ([UploadedFiles_Id]);
 GO
 
--- Creating foreign key on [Entity1FilesToDownload_FilesToDownload_Id] in table 'FilesToDownloadSet'
-ALTER TABLE [dbo].[FilesToDownloadSet]
-ADD CONSTRAINT [FK_Entity1FilesToDownload]
-    FOREIGN KEY ([Entity1FilesToDownload_FilesToDownload_Id])
-    REFERENCES [dbo].[FileLinksSet]
+-- Creating foreign key on [FilesToDownload_Id] in table 'FileLinksSet'
+ALTER TABLE [dbo].[FileLinksSet]
+ADD CONSTRAINT [FK_FilesToDownloadFileLinks]
+    FOREIGN KEY ([FilesToDownload_Id])
+    REFERENCES [dbo].[FilesToDownloadSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_Entity1FilesToDownload'
-CREATE INDEX [IX_FK_Entity1FilesToDownload]
-ON [dbo].[FilesToDownloadSet]
-    ([Entity1FilesToDownload_FilesToDownload_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_FilesToDownloadFileLinks'
+CREATE INDEX [IX_FK_FilesToDownloadFileLinks]
+ON [dbo].[FileLinksSet]
+    ([FilesToDownload_Id]);
 GO
 
 -- --------------------------------------------------

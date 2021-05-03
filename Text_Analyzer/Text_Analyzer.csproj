@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EPAM_Task_0\TextParser\Task2.csproj" />
+    <ProjectReference Include="..\..\EPAM_Task_0\TextParser\Text_Analyzer.TextUtility.csproj" />
     <ProjectReference Include="..\Text_Analyzer.DB\Text_Analyzer.DB.csproj" />
   </ItemGroup>
 
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="bootstrap" Version="4.6.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 

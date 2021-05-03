@@ -5,9 +5,13 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Text_Analyzer", "Text_Analyzer\Text_Analyzer.csproj", "{32003EBC-5315-4CB4-96B2-076C7440FE56}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task2", "..\EPAM_Task_0\TextParser\Task2.csproj", "{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Text_Analyzer.TextUtility", "..\EPAM_Task_0\TextParser\Text_Analyzer.TextUtility.csproj", "{11B486C6-CD1B-444A-B99C-F13A36A0F3DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text_Analyzer.DB", "Text_Analyzer.DB\Text_Analyzer.DB.csproj", "{399B0286-CC6E-4856-A94A-661D16FA730B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text_Analyzer.DAL", "Text_Analyzer.DAL\Text_Analyzer.DAL.csproj", "{EE7298C7-9380-4746-9818-AC4C9F72E156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text_Analyzer.BL", "Text_Analyzer.BL\Text_Analyzer.BL.csproj", "{BBD930E1-0D4A-4841-B644-D7C9CC7B7A0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{399B0286-CC6E-4856-A94A-661D16FA730B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399B0286-CC6E-4856-A94A-661D16FA730B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399B0286-CC6E-4856-A94A-661D16FA730B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7298C7-9380-4746-9818-AC4C9F72E156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7298C7-9380-4746-9818-AC4C9F72E156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7298C7-9380-4746-9818-AC4C9F72E156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7298C7-9380-4746-9818-AC4C9F72E156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD930E1-0D4A-4841-B644-D7C9CC7B7A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD930E1-0D4A-4841-B644-D7C9CC7B7A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD930E1-0D4A-4841-B644-D7C9CC7B7A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD930E1-0D4A-4841-B644-D7C9CC7B7A0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

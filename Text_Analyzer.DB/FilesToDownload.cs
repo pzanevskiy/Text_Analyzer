@@ -14,7 +14,16 @@ namespace Text_Analyzer.DB
     
     public partial class FilesToDownload
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FilesToDownload()
+        {
+            this.FileLinks = new HashSet<FileLinks>();
+        }
+    
         public int Id { get; set; }
         public string Filename { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FileLinks> FileLinks { get; set; }
     }
 }

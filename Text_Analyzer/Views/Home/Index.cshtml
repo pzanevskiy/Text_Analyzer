@@ -8,6 +8,6 @@
 </div>
 <h3>Выберите файл для загрузки</h3>
 <form asp-action="Index" asp-controller="Home" method="post" enctype="multipart/form-data">
-    <input type="file" name="uploadedFile" /><br>
-    <input type="submit" value="Загрузить" />
+    <input type="file" class="input-group" name="uploadedFile" accept=".txt, .pdf, .docx" /><br>
+    <input type="submit" class="btn btn-success" value="Загрузить" />
 </form>

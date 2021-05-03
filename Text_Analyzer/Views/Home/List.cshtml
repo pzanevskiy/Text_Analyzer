@@ -1,24 +1,59 @@
-﻿@model IEnumerable<ConcordanceItemViewModel>
+﻿@model FileViewModel
 @{
     ViewBag.Title = "List";
 }
 
-<a asp-controller="Home" asp-action="Download">Download</a>
-
-@if (Model != null && Model.Count() > 0)
-{
-    <h4>Список слов</h4>
-    <hr />
-    <div class="container">
-        @foreach (var item in Model)
-        {
-            <div>
-                <p><span> @item.Word </span>---<span> @item.Count</span></p>
-            </div>            
-        }
+<a asp-controller="Home" asp-action="Download" asp-route-filename="@Model.FileInfo">Download</a>
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">           
+            <input type="text" id="Search" placeholder="Search" class="form-control" />
+        </div>
     </div>
+</div>
+@if (Model.Items != null && Model.Items.Count() > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Слово</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr class="Search">
+                    <td>@item.Words</td>
+                    <td>@item.Counter</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
 }
 else
 {
-    <div>Нет записей</div>
+    <div>Нет слов</div>
 }
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1) {
+                return true;
+            }
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            })
+        })
+    })
+</script>

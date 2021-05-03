@@ -8,7 +8,7 @@ namespace Text_Analyzer.Models
 {
     public class ConcordanceItemViewModel
     {
-        public IWord Word { get; set; }
-        public int Count { get; set; }
+        public string Words { get; set; }
+        public int Counter { get; set; }
     }
 }

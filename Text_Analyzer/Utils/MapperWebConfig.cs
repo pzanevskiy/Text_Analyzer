@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Task2.Models;
 using Text_Analyzer.Models;
+using Text_Analyzer.TextUtility.DataTransferObject;
 
 namespace Text_Analyzer.Utils
 {
@@ -12,7 +13,7 @@ namespace Text_Analyzer.Utils
     {
         public MapperWebConfig()
         {
-            CreateMap<ConcordanceItem, ConcordanceItemViewModel>().ReverseMap();
+            CreateMap<ConcordanceItemsDTO, ConcordanceItemViewModel>().ReverseMap();
         }
     }
 }
