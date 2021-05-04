@@ -9,14 +9,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Text_Analyzer.Models;
-using TextParser.Models.Interfaces;
-using TextParser.Service;
-using TextParser.Service.Interfaces;
-using TextParser.Models;
-using System.Text;
-using Task2.Models;
 using AutoMapper;
-using Text_Analyzer.TextUtility.DataTransferObject;
+using Text_Analyzer.Utility.Service.Interfaces;
+using Text_Analyzer.Utility.Service;
+using Text_Analyzer.Utility.Models.Interfaces;
+using Text_Analyzer.Utility.Models;
+using Text_Analyzer.Utility.DataTransferObject;
 
 namespace Text_Analyzer.Controllers
 {

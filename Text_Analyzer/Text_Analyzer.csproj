@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EPAM_Task_0\TextParser\Text_Analyzer.TextUtility.csproj" />
     <ProjectReference Include="..\Text_Analyzer.DB\Text_Analyzer.DB.csproj" />
+    <ProjectReference Include="..\Text_Analyzer.Utility\Text_Analyzer.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

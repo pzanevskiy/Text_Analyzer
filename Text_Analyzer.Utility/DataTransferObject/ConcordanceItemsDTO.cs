@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Text_Analyzer.Models
+namespace Text_Analyzer.Utility.DataTransferObject
 {
-    public class ConcordanceItemViewModel
+    public class ConcordanceItemsDTO
     {
         public string Words { get; set; }
         public int Counter { get; set; }
