@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-    <Folder Include="Service\" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Text_Analyzer.DAL\Text_Analyzer.DAL.csproj" />
+    <ProjectReference Include="..\Text_Analyzer.DB\Text_Analyzer.DB.csproj" />
   </ItemGroup>
 
 </Project>

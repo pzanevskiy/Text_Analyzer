@@ -123,8 +123,8 @@ namespace Text_Analyzer.Utility.Service
         public void WriteData(IEnumerable<ConcordanceItemsDTO> items, string filename)
         {
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-            string[] filepath = filename.Split('.');
-            FileInfo file = new FileInfo(filepath[0] + ".xlsx");
+          
+            FileInfo file = new FileInfo(filename);
             using (var excelPackage = new ExcelPackage(file))
             {
                 ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Лист 1");

@@ -25,11 +25,13 @@ namespace Text_Analyzer.Controllers
         private readonly IFileService _fileService = new FileService();
         private readonly ITextService _textService = new TextService();
         private readonly IMapper _mapper;
+        private ApplicationContext _applicationContext;
 
-        public HomeController(ILogger<HomeController> logger, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IMapper mapper, ApplicationContext applicationContext)
         {
             _logger = logger;
             _mapper = mapper;
+            _applicationContext = applicationContext;
         }
 
         public IActionResult Index()
@@ -50,12 +52,18 @@ namespace Text_Analyzer.Controllers
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
+                var uploaded = new UploadedFile() { Filename = path };
+                _applicationContext.UploadedFiles.Add(uploaded);
                 ICollection<string> strings = _fileService.GetData(path, uploadedFile.ContentType);
                 text = _parser.ParseText(strings);
                 IEnumerable<ConcordanceItem> x = _textService.Concordance(text);
                 var morph = _textService.ConcordanceMorphy(x);
                 var items = _mapper.Map<IEnumerable<ConcordanceItemsDTO>, IEnumerable<ConcordanceItemViewModel>>(morph);
-                _fileService.WriteData(morph, path);
+                _fileService.WriteData(morph, xslsPath);
+                var toDownload = new FileToDownload() { Filename = xslsPath };
+                _applicationContext.FileToDownloads.Add(toDownload);
+                _applicationContext.FileLinks.Add(new FileLinks() { UploadedFile = uploaded, FileToDownload = toDownload });
+                await _applicationContext.SaveChangesAsync();
                 var fileViewModel = new FileViewModel() { FileInfo = xslsPath, Items = items };
                 return View("List", fileViewModel);
             }

@@ -10,7 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Text_Analyzer.Utils;
-
+using Microsoft.EntityFrameworkCore;
+using Text_Analyzer.Models;
 namespace Text_Analyzer
 {
     public class Startup
@@ -25,6 +26,10 @@ namespace Text_Analyzer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            // добавляем контекст MobileContext в качестве сервиса в приложение
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
 
             var mapperConfig = new MapperConfiguration(mc =>
