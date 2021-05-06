@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Text_Analyzer.Models.HistoryItemViewModel>
+
+    @{
+        ViewData["Title"] = "History";
+    }
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Загруженный файл
+                </th>
+                <th>
+                    Ответ
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Uploaded, "DownloadSource", "Home", new { filename = item.Uploaded, extension = item.UploadedExt })
+                    </td>
+
+                    <td>
+                        @Html.ActionLink(item.Downloaded, "Download", "Home", new { filename = item.Downloaded })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

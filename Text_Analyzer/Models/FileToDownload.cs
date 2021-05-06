@@ -9,5 +9,7 @@ namespace Text_Analyzer.Models
     {
         public int Id { get; set; }
         public string Filename { get; set; }
+
+        public virtual ICollection<FileLinks> FileLinks { get; set; }
     }
 }
